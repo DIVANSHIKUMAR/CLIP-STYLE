@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clip & Style - Online Barber Booking</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Style for date picker icon */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+
+    <!-- Header -->
+    <header class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-display text-3xl font-bold text-white">Clip & Style</a>
+            <div class="space-x-6 hidden md:block">
+                <a href="#home" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                <a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a>
+                <a href="#book" class="text-gray-300 hover:text-white transition-colors">Book</a>
+                <a href="#contact" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+            </div>
+            <a href="#book" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition-all hidden md:inline-block">
+                Book Now
+            </a>
+            <!-- Mobile menu button (optional, for simplicity we'll keep it simple) -->
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section id="home" class="h-[90vh] flex items-center justify-center text-center bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://placehold.co/1920x1080/232323/FFFFFF?text=Modern+Barbershop&font=playfair+display');">
+            <div class="container mx-auto px-6">
+                <h1 class="font-display text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                    Precision Cuts, Modern Style.
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                    Choose your look, pick your time. We'll handle the rest.
+                </p>
+                <a href="#services" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg text-lg transition-all transform hover:scale-105">
+                    View Services
+                </a>
+            </div>
+        </section>
+
+        <!-- Services Section (Haircut Selection) -->
+        <section id="services" class="py-24 bg-gray-800">
+            <div class="container mx-auto px-6">
+                <h2 class="font-display text-4xl font-bold text-center text-white mb-4">Choose Your Haircut</h2>
+                <p class="text-center text-gray-400 mb-16 max-w-xl mx-auto">
+                    Select the service you're interested in, and we'll add it to your booking.
+                </p>
+                <!-- Dynamic Services Grid -->
+                <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Service cards will be injected here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section id="book" class="py-24 bg-gray-900">
+            <div class="container mx-auto px-6 max-w-2xl">
+                <h2 class="font-display text-4xl font-bold text-center text-white mb-12">Book Your Appointment</h2>
+                
+                <form id="booking-form" class="bg-gray-800 p-8 md:p-12 rounded-2xl shadow-2xl space-y-6">
+                    <!-- Selected Service Display -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-400 mb-2">Selected Service</label>
+                        <div id="selected-service-display" class="w-full bg-gray-700 p-4 rounded-lg text-white font-semibold text-lg min-h-[50px]">
+                            Please select a service from the gallery above.
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Name -->
+                        <div>
+                            <label for="name" class="block text-sm font-semibold text-gray-400 mb-2">Full Name</label>
+                            <input type="text" id="name" name="name" required class="w-full bg-gray-700 text-white border-2 border-gray-600 rounded-lg p-3 focus:border-blue-500 focus:ring-blue-500 outline-none transition-all" placeholder="John Doe">
+                        </div>
+                        
+                        <!-- Phone -->
+                        <div>
+                            <label for="phone" class="block text-sm font-semibold text-gray-400 mb-2">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required class="w-full bg-gray-700 text-white border-2 border-gray-600 rounded-lg p-3 focus:border-blue-500 focus:ring-blue-500 outline-none transition-all" placeholder="+91 98765 43210">
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Date -->
+                        <div>
+                            <label for="date" class="block text-sm font-semibold text-gray-400 mb-2">Select Date</label>
+                            <input type="date" id="date" name="date" required class="w-full bg-gray-700 text-white border-2 border-gray-600 rounded-lg p-3 focus:border-blue-500 focus:ring-blue-500 outline-none transition-all">
+                        </div>
+                        
+                        <!-- Time -->
+                        <div>
+                            <label for="time" class="block text-sm font-semibold text-gray-400 mb-2">Select Time</label>
+                            <select id="time" name="time" required class="w-full bg-gray-700 text-white border-2 border-gray-600 rounded-lg p-3 focus:border-blue-500 focus:ring-blue-500 outline-none transition-all appearance-none">
+                                <option value="" disabled selected>Choose a time slot</option>
+                                <option value="09:00">09:00 AM</option>
+                                <option value="09:30">09:30 AM</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="10:30">10:30 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="11:30">11:30 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="13:00">01:00 PM</option>
+                                <option value="13:30">01:30 PM</option>
+                                <option value="14:00">02:00 PM</option>
+                                <option value="14:30">02:30 PM</option>
+                                <option value="15:00">03:00 PM</option>
+                                <option value="15:30">03:30 PM</option>
+                                <option value="16:00">04:00 PM</option>
+                                <option value="16:30">04:30 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Error Message -->
+                    <p id="error-message" class="text-red-400 text-sm font-semibold hidden"></p>
+                    
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg shadow-lg text-lg transition-all transform hover:scale-105">
+                        Confirm Appointment
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 bg-gray-800">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="font-display text-4xl font-bold text-white mb-6">Get In Touch</h2>
+                <p class="text-gray-300 text-lg mb-8 max-w-lg mx-auto">
+                    Have questions? Give us a call or drop by the shop.
+                </p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-12">
+                    <div class="text-lg">
+                        <span class="font-semibold block text-blue-400">Call Us</span>
+                        +91 98765 43210
+                    </div>
+                    <div class="text-lg">
+                        <span class="font-semibold block text-blue-400">Visit Us</span>
+                        123 Style Street, Khan Market, New Delhi, 110003
+                    </div>
+                    <div class="text-lg">
+                        <span class="font-semibold block text-blue-400">Visit Us</span>
+                        123 Style Street, New York, NY 10001
+                    </div>
+                    <div class="text-lg">
+                        <span class="font-semibold block text-blue-400">Hours</span>
+                        Mon - Sat: 9:00 AM - 5:00 PM
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-10">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; <span id="current-year"></span> Clip & Style. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 bg-black/70 flex items-center justify-center p-6 z-50 hidden">
+        <div class="bg-white text-gray-900 p-10 rounded-lg shadow-2xl max-w-md w-full text-center">
+            <h3 class="font-display text-3xl font-bold text-green-600 mb-4">Success!</h3>
+            <p class="text-lg mb-6" id="success-message">
+                Your appointment has been booked.
+            </WELCOME>
+            <button id="close-modal" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-8 rounded-lg shadow-md transition-all">
+                Close
+            </button>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const servicesGrid = document.getElementById('services-grid');
+            const bookingForm = document.getElementById('booking-form');
+            const selectedServiceDisplay = document.getElementById('selected-service-display');
+            const datePicker = document.getElementById('date');
+            const errorMessage = document.getElementById('error-message');
+            const successModal = document.getElementById('success-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            const successMessage = document.getElementById('success-message');
+
+            // --- Data for Services ---
+            const services = [
+                {
+                    id: 1,
+                    name: 'Classic Fade',
+                    price: '₹450',
+                    duration: '30 min',
+                    imageUrl: 'https://placehold.co/600x400/333333/FFFFFF?text=Classic+Fade&font=playfair+display'
+                },
+                {
+                    id: 2,
+                    name: 'Buzz Cut',
+                    price: '₹300',
+                    duration: '20 min',
+                    imageUrl: 'https://placehold.co/600x400/333333/FFFFFF?text=Buzz+Cut&font=playfair+display'
+                },
+                {
+                    id: 3,
+                    name: 'Beard Trim',
+                    price: '₹200',
+                    duration: '15 min',
+                    imageUrl: 'https://placehold.co/600x400/333333/FFFFFF?text=Beard+Trim&font=playfair+display'
+                },
+                {
+                    id: 4,
+                    name: 'The Full Works',
+                    price: '₹900',
+                    duration: '60 min',
+                    imageUrl: 'https://placehold.co/600x400/333333/FFFFFF?text=Full+Works&font=playfair+display'
+                },
+                 {
+                    id: 5,
+                    name: 'Skin Fade',
+                    price: '₹550',
+                    duration: '45 min',
+                    imageUrl: 'https://placehold.co/600x400/333333/FFFFFF?text=Skin+Fade&font=playfair+display'
+                },
+                 {
+                    id: 6,
+                    name: 'Kids Cut',
+                    price: '₹250',
+                    duration: '25 min',
+                    imageUrl: 'https://placehold.co/600x400/333333/FFFFFF?text=Kids+Cut&font=playfair+display'
+                }
+            ];
+            
+            let selectedService = null;
+
+            // --- Function to Render Services ---
+            function renderServices() {
+                servicesGrid.innerHTML = ''; // Clear existing
+                services.forEach(service => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-gray-900 rounded-xl shadow-lg overflow-hidden transition-all transform hover:scale-105 border-2 border-transparent';
+                    card.innerHTML = `
+                        <img src="${service.imageUrl}" alt="${service.name}" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-3">
+                                <h3 class="text-2xl font-bold text-white">${service.name}</h3>
+                                <span class="text-xl font-semibold text-blue-400">${service.price}</span>
+                            </div>
+                            <p class="text-gray-400 mb-5">${service.duration}</p>
+                            <button data-id="${service.id}" class="select-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
+                                Select
+                            </button>
+                        </div>
+                    `;
+                    servicesGrid.appendChild(card);
+                });
+            }
+            
+            // --- Function to Handle Service Selection ---
+            function handleServiceSelect(event) {
+                if (!event.target.classList.contains('select-btn')) return;
+                
+                const serviceId = event.target.dataset.id;
+                selectedService = services.find(s => s.id == serviceId);
+                
+                // Update the display in the booking form
+                selectedServiceDisplay.textContent = `${selectedService.name} - ${selectedService.price}`;
+                
+                // Update button styles
+                document.querySelectorAll('.select-btn').forEach(btn => {
+                    btn.textContent = 'Select';
+                    btn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                    btn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                    btn.closest('.bg-gray-900').classList.remove('border-blue-500');
+                });
+                
+                event.target.textContent = 'Selected!';
+                event.target.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                event.target.classList.add('bg-green-600', 'hover:bg-green-700');
+                event.target.closest('.bg-gray-900').classList.add('border-blue-500');
+                
+                // Scroll to the booking form
+                document.getElementById('book').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+
+            // --- Function to Handle Form Submission ---
+            function handleFormSubmit(event) {
+                event.preventDefault(); // Stop page reload
+                
+                // Get form values
+                const name = event.target.name.value;
+                const phone = event.target.phone.value;
+                const date = event.target.date.value;
+                const time = event.target.time.value;
+                
+                // Simple Validation
+                if (!name || !phone || !date || !time || !selectedService) {
+                    errorMessage.textContent = 'Please fill out all fields and select a service.';
+                    errorMessage.classList.remove('hidden');
+                    return;
+                }
+                
+                // Validation passed
+                errorMessage.classList.add('hidden');
+                
+                // Show success modal
+                successMessage.textContent = `Thanks, ${name}! Your appointment for a ${selectedService.name} is confirmed for ${date} at ${time}. We'll see you then!`;
+                successModal.classList.remove('hidden');
+                
+                // Reset form
+                bookingForm.reset();
+                selectedServiceDisplay.textContent = 'Please select a service from the gallery above.';
+                selectedService = null;
+                document.querySelectorAll('.select-btn').forEach(btn => {
+                    btn.textContent = 'Select';
+                    btn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                    btn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                    btn.closest('.bg-gray-900').classList.remove('border-blue-500');
+                });
+            }
+            
+            // --- Initial Setup ---
+            function initialize() {
+                // Set min date for date picker to today
+                datePicker.min = new Date().toISOString().split('T')[0];
+                
+                // Set current year in footer
+                document.getElementById('current-year').textContent = new Date().getFullYear();
+                
+                // Render services
+                renderServices();
+                
+                // Add event listeners
+                servicesGrid.addEventListener('click', handleServiceSelect);
+                bookingForm.addEventListener('submit', handleFormSubmit);
+                closeModalBtn.addEventListener('click', () => successModal.classList.add('hidden'));
+            }
+            
+            // Run the app
+            initialize();
+        });
+    </script>
+</body>
+</html>
